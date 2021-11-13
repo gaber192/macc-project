@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "105816622111",
+    "project_id": "macc-project-v1-0",
+    "storage_bucket": "macc-project-v1-0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105816622111:android:0b68b0ee6cb275f458812a",
+        "android_client_info": {
+          "package_name": "it.sapienza.macc_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105816622111-v43vck7m7fc1j9110lrievdjgksge4c8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.sapienza.macc_project",
+            "certificate_hash": "24ecc0b0a89c1ca9f453df1305764b21e52ac877"
+          }
+        },
+        {
+          "client_id": "105816622111-oafmasr39uigquvs8383dnfu6sc44loi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq_dyP-Z-60g0BZjJBWEwlWJj_dOD51TI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105816622111-oafmasr39uigquvs8383dnfu6sc44loi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
