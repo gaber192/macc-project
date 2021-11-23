@@ -11,12 +11,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import it.sapienza.macc_project.databinding.ActivityLoginScreenBinding
-import it.sapienza.macc_project.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_login_screen.*
 import java.lang.Exception
 
