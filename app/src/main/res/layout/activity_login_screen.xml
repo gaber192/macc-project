@@ -11,17 +11,21 @@
         android:id="@+id/view"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/common_google_signin_btn_icon_light"
+        android:src="@drawable/applogo"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/captionIv"
+        style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/view"
         android:layout_centerHorizontal="true"
-        android:text="Welcome"
-        style="@style/TextAppearance.AppCompat.Body1"
-        android:layout_below="@id/view"/>
+        android:layout_marginTop="50dp"
+        android:text="Monuments Finder"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
     <com.google.android.gms.common.SignInButton
         android:id="@+id/googleSignInBtn"
         android:layout_width="wrap_content"

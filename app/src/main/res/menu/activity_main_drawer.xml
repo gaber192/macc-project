@@ -16,5 +16,9 @@
             android:id="@+id/nav_utilities"
             android:icon="@drawable/preference"
             android:title="@string/menu_utilities" />
+        <item
+            android:id="@+id/nav_info"
+            android:icon="@drawable/info"
+            android:title="@string/menu_info" />
     </group>
 </menu>
