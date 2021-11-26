@@ -8,7 +8,7 @@
     <string name="action_logout">Logout</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="title_activity_maps">MapsActivity</string>
+    <string name="menu_preferred">Preferred</string>
+    <string name="menu_utilities">Utilities</string>
+
 </resources>

@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="it.sapienza.macc_project.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_prefs"
+        android:name="it.sapienza.macc_project.ui.preferred.PreferredFragment"
+        android:label="@string/menu_preferred"
+        tools:layout="@layout/fragment_preferred" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="it.sapienza.macc_project.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_utilities"
+        android:name="it.sapienza.macc_project.ui.utilities.UtilitiesFragment"
+        android:label="@string/menu_utilities"
+        tools:layout="@layout/fragment_utilities" />
 </navigation>

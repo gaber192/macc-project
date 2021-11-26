@@ -1,10 +1,10 @@
-package it.sapienza.macc_project.ui.gallery
+package it.sapienza.macc_project.ui.preferred
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class GalleryViewModel : ViewModel() {
+class PreferredViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is gallery Fragment"

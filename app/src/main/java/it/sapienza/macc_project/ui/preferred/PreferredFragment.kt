@@ -1,4 +1,4 @@
-package it.sapienza.macc_project.ui.slideshow
+package it.sapienza.macc_project.ui.preferred
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import it.sapienza.macc_project.databinding.FragmentSlideshowBinding
+import it.sapienza.macc_project.databinding.FragmentPreferredBinding
 
-class SlideshowFragment : Fragment() {
+class PreferredFragment : Fragment() {
 
-    private lateinit var slideshowViewModel: SlideshowViewModel
-    private var _binding: FragmentSlideshowBinding? = null
+    private lateinit var preferredViewModel: PreferredViewModel
+    private var _binding: FragmentPreferredBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -24,14 +24,14 @@ class SlideshowFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        slideshowViewModel =
-                ViewModelProvider(this).get(SlideshowViewModel::class.java)
+        preferredViewModel =
+                ViewModelProvider(this).get(PreferredViewModel::class.java)
 
-        _binding = FragmentSlideshowBinding.inflate(inflater, container, false)
+        _binding = FragmentPreferredBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textSlideshow
-        slideshowViewModel.text.observe(viewLifecycleOwner, Observer {
+        val textView: TextView = binding.textGallery
+        preferredViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

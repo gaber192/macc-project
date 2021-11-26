@@ -90,7 +90,7 @@ class LoginScreen : AppCompatActivity() {
                     } else {
                         Log.d(TAG, "firebaseAuthWithGoogleAccount: Existing User... : \n$email")
                     }
-                    startActivity(Intent(this@LoginScreen, MapsActivity::class.java))
+                    startActivity(Intent(this@LoginScreen, MainActivity::class.java))
                     finish()
                 }
                         .addOnFailureListener{e ->
