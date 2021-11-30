@@ -11,5 +11,6 @@
     <string name="menu_preferred">Preferred</string>
     <string name="menu_utilities">Utilities</string>
     <string name="menu_info">Info</string>
+    <string name="dwc_id" translatable="false">105816622111-oafmasr39uigquvs8383dnfu6sc44loi.apps.googleusercontent.com</string>
 
 </resources>

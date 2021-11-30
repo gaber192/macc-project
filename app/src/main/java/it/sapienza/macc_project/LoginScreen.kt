@@ -33,7 +33,7 @@ class LoginScreen : AppCompatActivity() {
 
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestIdToken(getString(R.string.dwc_id))
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
@@ -65,7 +65,7 @@ class LoginScreen : AppCompatActivity() {
                     val account = task.getResult(ApiException::class.java)
                     firebaseAuthWithGoogleAccount(account)
                 }catch (e:Exception){
-                    Log.d(TAG,"onActivityResult: ${e.message}")
+                    Log.d(TAG,"onActivityResult:errore ${e.message}")
                 }
             }
         }

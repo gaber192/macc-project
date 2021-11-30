@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "105816622111-h2lvq3ig3o1kibac344vebfdmc73dice.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.sapienza.macc_project",
+            "certificate_hash": "8642a10d9f532be8f482b8262e1745828d6c5168"
+          }
+        },
+        {
           "client_id": "105816622111-v43vck7m7fc1j9110lrievdjgksge4c8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
