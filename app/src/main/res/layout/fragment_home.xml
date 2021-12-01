@@ -24,4 +24,14 @@
 
     </TextView>
 
+    <ImageView
+        android:id="@+id/favourite"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="350dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:src="@drawable/favourite" />
+
 </RelativeLayout>

@@ -8,13 +8,16 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import it.sapienza.macc_project.databinding.FragmentPreferredBinding
+import kotlinx.android.synthetic.main.fragment_preferred.*
 
 class PreferredFragment : Fragment() {
 
-    private lateinit var preferredViewModel: PreferredViewModel
     private var _binding: FragmentPreferredBinding? = null
-
+    private var layoutManager: RecyclerView.LayoutManager? = null
+    private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -24,8 +27,7 @@ class PreferredFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        preferredViewModel =
-                ViewModelProvider(this).get(PreferredViewModel::class.java)
+
 
         _binding = FragmentPreferredBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -34,10 +36,22 @@ class PreferredFragment : Fragment() {
         return root
     }
 
-    
+    override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(itemView, savedInstanceState)
+        recycler_view.apply {
+            // set a LinearLayoutManager to handle Android
+            // RecyclerView behavior
+            layoutManager = LinearLayoutManager(activity)
+            // set the custom adapter to the RecyclerView
+            adapter = RecyclerAdapter()
+
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
