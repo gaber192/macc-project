@@ -30,12 +30,11 @@ class PreferredFragment : Fragment() {
         _binding = FragmentPreferredBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textGallery
-        preferredViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+
         return root
     }
+
+    
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -9,15 +9,18 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="500dp"
 
         />
 
     <TextView
+        android:id="@+id/description"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="500dp"
         android:layout_below="@+id/mapView"
-        android:text="ciao questo è un testo di prova ">
+        android:singleLine="false"
+        android:scrollbars = "vertical"
+        android:textSize="20sp">
 
     </TextView>
 
