@@ -16,6 +16,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import it.sapienza.macc_project.databinding.ActivityLoginScreenBinding
 import kotlinx.android.synthetic.main.activity_login_screen.*
 import java.lang.Exception
@@ -30,6 +36,11 @@ class LoginScreen : AppCompatActivity() {
         private const val TAG = "GOOGLE_SIGN_IN_TAG"
     }
     private var REQUEST_CODE: Int = 0
+
+    val database = Firebase.database
+    val myRef = database.getReference("Myapp").child("user")
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginScreenBinding.inflate(layoutInflater)
@@ -72,6 +83,29 @@ class LoginScreen : AppCompatActivity() {
             val signInIntent: Intent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
+
+        myRef.addValueEventListener(object: ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+
+                try {
+                    val value = snapshot.getValue<String>()
+                    Log.d("NOT AN ERROR", "Value is: " + value)
+                }catch (e: Exception){
+                    Log.d("ERROR", e.toString())
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w(TAG, "Failed to read value.", error.toException())
+            }
+
+        })
+
+
     }
 
         private fun checkUser() {
@@ -115,6 +149,8 @@ class LoginScreen : AppCompatActivity() {
                     } else {
                         Log.d(TAG, "firebaseAuthWithGoogleAccount: Existing User... : \n$email")
                     }
+
+                    myRef.child(uid).child("email").setValue(email)
                     startActivity(Intent(this@LoginScreen, MainActivity::class.java))
                     finish()
                 }
