@@ -62,7 +62,7 @@ class PreferredFragment : Fragment() {
                     for (h in p0.children) {
                         Monument?.add(h.key!!)
                     }
-                    recycler_view.apply {
+                    recycler_view1.apply {
                         // set a LinearLayoutManager to handle Android
                         // RecyclerView behavior
                         layoutManager = LinearLayoutManager(requireContext())

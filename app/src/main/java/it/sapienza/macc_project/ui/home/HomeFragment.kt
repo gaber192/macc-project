@@ -28,6 +28,7 @@ import android.os.StrictMode
 import android.text.method.ScrollingMovementMethod
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -35,6 +36,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import it.sapienza.macc_project.ui.buddies.RecyclerAdapter
+import kotlinx.android.synthetic.main.fragment_buddies.*
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
 
@@ -43,6 +46,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     lateinit var mMap: GoogleMap
     var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     var database: DatabaseReference = Firebase.database.reference.child("Myapp").child("user").child(firebaseAuth.currentUser?.uid.toString())
+    var instancedb: DatabaseReference = Firebase.database.reference.child("Myapp").child("user")
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -54,6 +58,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     var monument_name : String = " "
     var monument_position : String = " "
     var Map : HashMap<String, String> = hashMapOf()
+    var Buddies : HashMap<String, String> = hashMapOf()
+    var Buddies_position : HashMap<String, Marker> = hashMapOf()
     lateinit var tv : TextView
     lateinit var iv : ImageView
 
@@ -64,6 +70,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         mapView.getMapAsync(this)
 
         Map = hashMapOf()
+        Buddies = hashMapOf()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
@@ -116,7 +123,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     me = LatLng(location.latitude, location.longitude)
                     myMarker.position= me
                     myMarker.title="Me"
-                    database.child("last_position").setValue(location.latitude.toString()+" "+location.longitude.toString())
+                    database.child("last_position").setValue(location.latitude.toString()+","+location.longitude.toString())
                 }
             }
         }
@@ -161,6 +168,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     }
             }
         }
+
         database.child("monuments_preferred").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
@@ -174,6 +182,54 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 }
             }
         })
+
+        database.child("buddies").get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val snapshot = task.result
+                Buddies.clear()
+                for (h in snapshot.children){
+                    Buddies[h.key!!]= h.value.toString()
+                }
+            } else {
+                Log.d("TAG", task.exception!!.message!!) //Don't ignore potential errors!
+            }}
+
+        database.child("buddies").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+            }
+            override fun onDataChange(p0: DataSnapshot) {
+                Buddies = hashMapOf()
+                if (p0!!.exists()) {
+                    for (h in p0.children) {
+                        val element = h.getValue(String::class.java)!!
+                        Buddies[h.key!!] = element
+                    }
+                }
+            }
+        })
+
+
+
+    instancedb.addValueEventListener(object : ValueEventListener {
+        override fun onCancelled(p0: DatabaseError) {
+        }
+        override fun onDataChange(p0: DataSnapshot) {
+            if (p0!!.exists()) {
+                for (h in p0.children) {
+                    for (l in Buddies.entries) {
+                        if (h.child("email").value == l.value) {
+                            val latlong =
+                                h.child("last_position").value.toString().split(",").toTypedArray()
+                            val lat = latlong[0].toDouble()
+                            val long = latlong[1].toDouble()
+                            Buddies_position[l.key]?.position=LatLng(lat, long)
+                        }
+                    }
+                }
+            }
+        }
+    })
+
         return root
     }
 
@@ -195,6 +251,30 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         mMap = googleMap
         mMap.setOnPoiClickListener(poiclicklistener)
         addMarker()
+
+        instancedb.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val snapshot = task.result
+                for (h in snapshot.children){
+                    for (l in Buddies.entries) {
+                        if (h.child("email").value == l.value) {
+                            val latlong =
+                                h.child("last_position").value.toString().split(",").toTypedArray()
+                            val lat = latlong[0].toDouble()
+                            val long = latlong[1].toDouble()
+                            Buddies_position.put(l.key, mMap.addMarker(
+                                MarkerOptions().position(LatLng(lat, long)).icon(
+                                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
+                                ).title(l.key)
+                            ))
+                        }
+                    }
+                }
+            } else {
+                Log.d("TAG", task.exception!!.message!!) //Don't ignore potential errors!
+            }}
+
+
     }
 
     private fun startLocationUpdates() {

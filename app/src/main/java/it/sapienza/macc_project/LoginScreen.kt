@@ -151,6 +151,7 @@ class LoginScreen : AppCompatActivity() {
                     }
 
                     myRef.child(uid).child("email").setValue(email)
+                    myRef.child(uid).child("name").setValue(firebaseUser.displayName)
                     startActivity(Intent(this@LoginScreen, MainActivity::class.java))
                     finish()
                 }

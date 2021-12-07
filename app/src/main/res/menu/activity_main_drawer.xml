@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/map"
@@ -13,9 +15,21 @@
             android:icon="@drawable/favorite"
             android:title="@string/menu_preferred" />
         <item
+            android:id="@+id/nav_buddies"
+            android:icon="@drawable/buddies"
+            android:title="@string/menu_buddies" />
+    </group>
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="single">
+        <item
             android:id="@+id/nav_utilities"
             android:icon="@drawable/preference"
             android:title="@string/menu_utilities" />
+    </group>
+    <group
+        android:id="@+id/action_menu_divider"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_info"
             android:icon="@drawable/info"

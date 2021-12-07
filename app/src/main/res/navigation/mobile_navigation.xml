@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_preferred" />
 
     <fragment
+        android:id="@+id/nav_buddies"
+        android:name="it.sapienza.macc_project.ui.buddies.BuddiesFragment"
+        android:label="@string/menu_buddies"
+        tools:layout="@layout/fragment_buddies" />
+
+    <fragment
         android:id="@+id/nav_utilities"
         android:name="it.sapienza.macc_project.ui.utilities.UtilitiesFragment"
         android:label="@string/menu_utilities"

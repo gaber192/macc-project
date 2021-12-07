@@ -19,8 +19,13 @@
         <entry key="..\:/AndroidStudio/maccproject/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/gaber/AndroidStudioProjects/macc-project/app/src/main/res/layout/add_monument_fragment.xml" value="0.25" />
         <entry key="..\:/Users/gaber/AndroidStudioProjects/macc-project/app/src/main/res/layout/cardview.xml" value="0.25" />
+        <entry key="..\:/Users/gaber/AndroidStudioProjects/macc-project/app/src/main/res/layout/cardview_buddy.xml" value="0.25" />
+        <entry key="..\:/Users/gaber/AndroidStudioProjects/macc-project/app/src/main/res/layout/fragment_buddies.xml" value="0.25" />
         <entry key="..\:/Users/gaber/AndroidStudioProjects/macc-project/app/src/main/res/layout/fragment_home.xml" value="0.17844202898550723" />
+        <entry key="..\:/Users/gaber/AndroidStudioProjects/macc-project/app/src/main/res/layout/fragment_info.xml" value="0.25" />
         <entry key="..\:/Users/gaber/AndroidStudioProjects/macc-project/app/src/main/res/layout/fragment_preferred.xml" value="0.18704710144927536" />
+        <entry key="..\:/Users/gaber/AndroidStudioProjects/macc-project/app/src/main/res/menu/activity_main_drawer.xml" value="0.25" />
+        <entry key="..\:/Users/gaber/AndroidStudioProjects/macc-project/app/src/main/res/menu/main.xml" value="0.25" />
       </map>
     </option>
   </component>
