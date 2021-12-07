@@ -188,7 +188,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 val snapshot = task.result
                 Buddies.clear()
                 for (h in snapshot.children){
-                    Buddies[h.key!!]= h.value.toString()
+                    Buddies[h.key!!]= h.child("email").value.toString()
                 }
             } else {
                 Log.d("TAG", task.exception!!.message!!) //Don't ignore potential errors!
@@ -201,8 +201,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 Buddies = hashMapOf()
                 if (p0!!.exists()) {
                     for (h in p0.children) {
-                        val element = h.getValue(String::class.java)!!
-                        Buddies[h.key!!] = element
+                        Buddies[h.key!!]= h.child("email").value.toString()
                     }
                 }
             }
@@ -218,18 +217,20 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 for (h in p0.children) {
                     for (l in Buddies.entries) {
                         if (h.child("email").value == l.value) {
+                            var name = h.child("name").value.toString()
                             val latlong =
-                                h.child("last_position").value.toString().split(",").toTypedArray()
-                            val lat = latlong[0].toDouble()
-                            val long = latlong[1].toDouble()
-                            Buddies_position[l.key]?.position=LatLng(lat, long)
+                                    h.child("last_position").value.toString().split(",")
+                                        .toTypedArray()
+                                val lat = latlong[0].toDouble()
+                                val long = latlong[1].toDouble()
+                                database.child("buddies").child(name).child("last_position").setValue(lat.toString()+","+long.toString())
+                                Buddies_position[l.key]?.position = LatLng(lat, long)
+                            }
                         }
                     }
                 }
             }
-        }
     })
-
         return root
     }
 
@@ -255,18 +256,24 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         instancedb.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val snapshot = task.result
-                for (h in snapshot.children){
+                for (h in snapshot.children) {
                     for (l in Buddies.entries) {
                         if (h.child("email").value == l.value) {
-                            val latlong =
-                                h.child("last_position").value.toString().split(",").toTypedArray()
-                            val lat = latlong[0].toDouble()
-                            val long = latlong[1].toDouble()
-                            Buddies_position.put(l.key, mMap.addMarker(
-                                MarkerOptions().position(LatLng(lat, long)).icon(
-                                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
-                                ).title(l.key)
-                            ))
+                            //
+                                val latlong =
+                                    h.child("last_position").value.toString().split(",")
+                                        .toTypedArray()
+                                val lat = latlong[0].toDouble()
+                                val long = latlong[1].toDouble()
+                                Buddies_position.put(
+                                    l.key, mMap.addMarker(
+                                        MarkerOptions().position(LatLng(lat, long)).icon(
+                                            BitmapDescriptorFactory.defaultMarker(
+                                                BitmapDescriptorFactory.HUE_RED
+                                            )
+                                        ).title(l.key)
+                                    )
+                                )
                         }
                     }
                 }

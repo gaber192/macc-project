@@ -84,7 +84,7 @@ class BuddiesFragment : Fragment() {
                                 if(!buddy.equals(firebaseAuth.currentUser!!.email.toString())) {
                                     buddy_name=h.child("name").value.toString()
                                     Buddies?.add(buddy_name)
-                                    database.child(firebaseAuth.currentUser?.uid.toString()).child("buddies").child(buddy_name).setValue(buddy)
+                                    database.child(firebaseAuth.currentUser?.uid.toString()).child("buddies").child(buddy_name).child("email").setValue(buddy)
                                     Toast.makeText(requireContext(),"Added buddy",Toast.LENGTH_SHORT).show()
                                 }else{
                                     Toast.makeText(requireContext(),"Cannot add as a buddy yourself",Toast.LENGTH_SHORT).show()
