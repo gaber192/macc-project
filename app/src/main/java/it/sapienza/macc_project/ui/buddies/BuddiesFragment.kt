@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -19,11 +21,13 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import it.sapienza.macc_project.R
 import it.sapienza.macc_project.databinding.FragmentBuddiesBinding
+import it.sapienza.macc_project.ui.info.InfoFragment
 import kotlinx.android.synthetic.main.fragment_buddies.*
 
 
-class BuddiesFragment : Fragment() {
+class BuddiesFragment : Fragment(),View.OnClickListener {
 
     private var _binding: FragmentBuddiesBinding? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
@@ -41,6 +45,8 @@ class BuddiesFragment : Fragment() {
     private lateinit var mydb: DatabaseReference
     lateinit var Buddies: ArrayList<String>
 
+
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -54,7 +60,10 @@ class BuddiesFragment : Fragment() {
         Buddies= ArrayList()
 
         layoutManager = LinearLayoutManager(requireContext())
-        adapter = RecyclerAdapter(requireContext(),Buddies)
+        adapter = RecyclerAdapter(requireContext(),Buddies,this)
+
+
+
         tv = binding.buddiesTv
         btn = binding.addBtn
         firebaseAuth = FirebaseAuth.getInstance()
@@ -113,12 +122,14 @@ class BuddiesFragment : Fragment() {
                     // RecyclerView behavior
                     layoutManager = LinearLayoutManager(requireContext())
                     // set the custom adapter to the RecyclerView
-                    adapter = RecyclerAdapter(requireContext(),Buddies)
+                    adapter = RecyclerAdapter(requireContext(),Buddies,this@BuddiesFragment)
 
                 }
             } else {
                 Log.d("TAG", task.exception!!.message!!) //Don't ignore potential errors!
             }}
+
+
     }
 
     override fun onDestroyView() {
@@ -126,7 +137,15 @@ class BuddiesFragment : Fragment() {
         _binding = null
     }
 
+    override fun onClick(v: View?) {
+        var position=v?.tag as String
+        Log.d("TAG6",position)
+        val bundle = bundleOf("name" to position)
+        view?.findNavController()?.navigate(R.id.action_nav_buddies_to_nav_buddy,bundle)
+    }
+
 }
+
 
 
 

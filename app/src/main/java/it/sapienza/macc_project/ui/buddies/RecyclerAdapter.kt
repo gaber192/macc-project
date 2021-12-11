@@ -7,17 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import it.sapienza.macc_project.R
 
-class RecyclerAdapter(val context: Context, val list:ArrayList<String>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+import androidx.fragment.app.*
+import it.sapienza.macc_project.R
+import android.app.Activity
+
+import androidx.fragment.app.Fragment
+
+
+class RecyclerAdapter(val context: Context, val list:ArrayList<String>,onClickListener: View.OnClickListener) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
+
+    var onClickListener = onClickListener
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -27,6 +36,7 @@ class RecyclerAdapter(val context: Context, val list:ArrayList<String>) : Recycl
         init {
             mon_id = itemView.findViewById(R.id.monument_tv)
             fav = itemView.findViewById(R.id.fav_ib)
+
             }
 
     }
@@ -34,6 +44,7 @@ class RecyclerAdapter(val context: Context, val list:ArrayList<String>) : Recycl
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         val v = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.cardview_buddy, viewGroup, false)
+
 
         return ViewHolder(v)
     }
@@ -45,15 +56,22 @@ class RecyclerAdapter(val context: Context, val list:ArrayList<String>) : Recycl
 
         viewHolder.mon_id.text=list[i]
         viewHolder.fav.setOnClickListener { v: View ->
-
             delete_monument(i)
         }
+
+        viewHolder.itemView.tag= list[i]
+        viewHolder.itemView.setOnClickListener{
+            onClickListener.onClick(viewHolder.itemView)
+        }
+
+
 
     }
 
     override fun getItemCount(): Int {
         return list.size
     }
+
 
     fun delete_monument(i: Int) {
         database.child(list[i]).removeValue()

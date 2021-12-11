@@ -21,8 +21,16 @@
         android:id="@+id/nav_buddies"
         android:name="it.sapienza.macc_project.ui.buddies.BuddiesFragment"
         android:label="@string/menu_buddies"
-        tools:layout="@layout/fragment_buddies" />
-
+        tools:layout="@layout/fragment_buddies" >
+        <action
+            android:id="@+id/action_nav_buddies_to_nav_buddy"
+            app:destination="@id/nav_buddy" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_buddy"
+        android:name="it.sapienza.macc_project.ui.buddies.CompassBuddyFragment"
+        android:label="@string/menu_buddies"
+        tools:layout="@layout/fragment_compassbuddy" />
     <fragment
         android:id="@+id/nav_utilities"
         android:name="it.sapienza.macc_project.ui.utilities.UtilitiesFragment"

@@ -74,7 +74,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
-                me = LatLng(location!!.latitude, location!!.longitude)
+                if (location != null) {
+                    me = LatLng(location.latitude, location.longitude)
+                }
                 myMarker = mMap.addMarker(
                     MarkerOptions().position(me)
                         .title("Me")
