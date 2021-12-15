@@ -92,6 +92,7 @@ class BuddiesFragment : Fragment(),View.OnClickListener {
                             if(buddy.equals(h.child("email").value)){
                                 if(!buddy.equals(firebaseAuth.currentUser!!.email.toString())) {
                                     buddy_name=h.child("name").value.toString()
+                                    buddy_name.replace(".","")
                                     Buddies?.add(buddy_name)
                                     database.child(firebaseAuth.currentUser?.uid.toString()).child("buddies").child(buddy_name).child("email").setValue(buddy)
                                     Toast.makeText(requireContext(),"Added buddy",Toast.LENGTH_SHORT).show()

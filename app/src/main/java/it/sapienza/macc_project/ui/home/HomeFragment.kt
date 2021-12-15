@@ -50,7 +50,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    lateinit var me : LatLng
+    var me : LatLng? = null
     lateinit var myMarker : Marker
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     lateinit var locationCallback : LocationCallback
@@ -78,9 +78,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     me = LatLng(location.latitude, location.longitude)
                 }
                 myMarker = mMap.addMarker(
-                    MarkerOptions().position(me)
-                        .title("Me")
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                    me?.let {
+                        MarkerOptions().position(it)
+                            .title("Me")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                    }
                 )
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(me,14f))
             }
