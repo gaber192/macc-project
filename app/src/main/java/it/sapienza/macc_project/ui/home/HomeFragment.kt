@@ -158,6 +158,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                         monument_position = p0!!.latLng.latitude.toString()+","+p0!!.latLng.longitude.toString()
                         // fetch JSONObject data
                         tv.setText(monument_name + "\n"+ element.getString("extract"))
+                        Log.d("PINVISIBILE","pin è visibile"+iv.toString())
                         iv.visibility = View.VISIBLE
                         iv.setOnClickListener { v: View ->
                             builder.show()

@@ -38,6 +38,7 @@ class CompassBuddyFragment : Fragment(),SensorEventListener {
     private lateinit var tv1: TextView
     private lateinit var tv2: TextView
     private lateinit var tv3: TextView
+    private lateinit var tv4: TextView
     private lateinit var geoField: GeomagneticField
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -57,6 +58,7 @@ class CompassBuddyFragment : Fragment(),SensorEventListener {
         tv1= binding.azimuth
         tv2= binding.bearing
         tv3= binding.direction
+        tv4= binding.distance
         myloc = locationManager.getLastKnownLocation(locationManager.getProviders(true).get(0))
         val name: String = arguments?.getString("name").toString()
         buddyname.text=name
@@ -126,6 +128,7 @@ class CompassBuddyFragment : Fragment(),SensorEventListener {
         tv1.text="Azimuth: "+azimuth.toString()+" °"
         tv2.text="Bearing: "+bearTo.toString()+" °"
         tv3.text="Direction: "+direction.toString()+" °"
+        tv4.text="Distance: "+myloc.distanceTo(target)+" m"
 
         iv.animate().rotation(direction).setDuration(3000).setInterpolator(LinearInterpolator()).start()
 

@@ -149,9 +149,9 @@ class LoginScreen : AppCompatActivity() {
                     } else {
                         Log.d(TAG, "firebaseAuthWithGoogleAccount: Existing User... : \n$email")
                     }
-
+                    val fname : String = firebaseUser.displayName.toString()
                     myRef.child(uid).child("email").setValue(email)
-                    myRef.child(uid).child("name").setValue(firebaseUser.displayName)
+                    myRef.child(uid).child("name").setValue(fname.replace(".",""))
                     startActivity(Intent(this@LoginScreen, MainActivity::class.java))
                     finish()
                 }

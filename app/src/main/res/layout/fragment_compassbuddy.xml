@@ -35,14 +35,22 @@
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/compass_dial"
         />
+
     <TextView
         android:id="@+id/direction"
         android:layout_width="320dp"
         android:layout_height="30dp"
-        android:layout_marginTop="160dp"
         android:layout_centerHorizontal="true"
-        android:contentDescription="@string/compass_dial"
-        />
+        android:layout_marginTop="160dp"
+        android:contentDescription="@string/compass_dial" />
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="320dp"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:contentDescription="@string/compass_dial" />
 
     <ImageView
         android:id="@+id/main_image_hands"
