@@ -28,6 +28,19 @@
             android:title="@string/menu_utilities" />
     </group>
     <group
+        android:id="@+id/menu_sensors"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_light"
+            android:icon="@drawable/info"
+            android:title="@string/menu_light" />
+
+        <item
+            android:id="@+id/nav_bar"
+            android:icon="@drawable/info"
+            android:title="@string/menu_bar" />
+    </group>
+    <group
         android:id="@+id/action_menu_divider"
         android:checkableBehavior="single">
         <item

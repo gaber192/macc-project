@@ -37,6 +37,16 @@
         android:label="@string/menu_utilities"
         tools:layout="@layout/fragment_utilities" />
     <fragment
+        android:id="@+id/nav_light"
+        android:name="it.sapienza.macc_project.ui.lightsensor.LightSensorFragment"
+        android:label="@string/menu_light"
+        tools:layout="@layout/fragment_lightsensor" />
+    <fragment
+        android:id="@+id/nav_bar"
+        android:name="it.sapienza.macc_project.ui.meteosensor.MeteoSensorFragment"
+        android:label="@string/menu_bar"
+        tools:layout="@layout/fragment_meteosensor" />
+    <fragment
         android:id="@+id/nav_info"
         android:name="it.sapienza.macc_project.ui.info.InfoFragment"
         android:label="@string/menu_info"

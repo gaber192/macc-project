@@ -12,6 +12,8 @@
     <string name="menu_buddies">Buddies</string>
     <string name="menu_utilities">Utilities</string>
     <string name="menu_info">Info</string>
+    <string name="menu_light">Luminometer</string>
+    <string name="menu_bar">Barometer</string>
     <string name="dwc_id" translatable="false">105816622111-oafmasr39uigquvs8383dnfu6sc44loi.apps.googleusercontent.com</string>
 
 
