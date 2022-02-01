@@ -1,38 +1,47 @@
 package it.sapienza.macc_project.ui.lightsensor
 
+import android.content.Context.SENSOR_SERVICE
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.Fragment
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import it.sapienza.macc_project.R
+import it.sapienza.macc_project.databinding.FragmentLightsensorBinding
 
 
-class LightSensorFragment : AppCompatActivity(), SensorEventListener {
+class LightSensorFragment : Fragment(), SensorEventListener {
 
     private lateinit var sensorManager: SensorManager
     private var brightness: Sensor? = null
     private lateinit var text: TextView
     private lateinit var pb: CircularProgressBar
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_lightsensor)
-
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
-        text = findViewById(R.id.tv_text)
-        pb = findViewById(R.id.circularProgressBar)
+    private var _binding: FragmentLightsensorBinding? = null
+    private val binding get() = _binding!!
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentLightsensorBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+        text = binding.ligthTv
+        pb = binding.circularProgressBar
 
         setUpSensorStuff()
+
+        return root
     }
 
     private fun setUpSensorStuff() {
-        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        sensorManager = requireContext().getSystemService(SENSOR_SERVICE) as SensorManager
 
         brightness = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
     }

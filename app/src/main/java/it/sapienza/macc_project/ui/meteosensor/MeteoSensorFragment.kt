@@ -1,33 +1,49 @@
 package it.sapienza.macc_project.ui.meteosensor
 
+import android.content.Context.SENSOR_SERVICE
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import it.sapienza.macc_project.R
 import androidx.fragment.app.Fragment
+import it.sapienza.macc_project.databinding.FragmentLightsensorBinding
+import it.sapienza.macc_project.databinding.FragmentMeteosensorBinding
 
 
-
-class MeteoSensorFragment : AppCompatActivity(), SensorEventListener {
+class MeteoSensorFragment : Fragment(), SensorEventListener {
 
     private lateinit var sensorManager: SensorManager
     private var pressure: Sensor? = null
+    private var _binding: FragmentMeteosensorBinding? = null
+    private val binding get() = _binding!!
 
-    public override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_meteosensor)
+    private lateinit var text: TextView
 
-        // Get an instance of the sensor service, and use that to get an instance of
-        // a particular sensor.
-        sensorManager = applicationContext.getSystemService(SENSOR_SERVICE) as SensorManager
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentMeteosensorBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+        text = binding.BarValue
 
+        sensorManager = requireContext().getSystemService(SENSOR_SERVICE) as SensorManager
         pressure = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE)
+
+
+
+        return root
     }
+
 
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {
         // Do something here if sensor accuracy changes.
@@ -35,6 +51,8 @@ class MeteoSensorFragment : AppCompatActivity(), SensorEventListener {
 
     override fun onSensorChanged(event: SensorEvent) {
         val millibarsOfPressure = event.values[0]
+        text.text = event.values[0].toString()
+
         // Do something with this sensor data.
     }
 

@@ -20,7 +20,7 @@
         app:cpb_round_border="true" />
 
     <TextView
-        android:id="@+id/tv_text"
+        android:id="@+id/ligth_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
