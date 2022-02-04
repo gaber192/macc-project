@@ -50,7 +50,7 @@ class LightSensorFragment : Fragment(), SensorEventListener {
         if (event?.sensor?.type == Sensor.TYPE_LIGHT) {
             val light1 = event.values[0]
 
-            text.text = "Sensor: $light1\n${brightness(light1)}"
+            text.text = "Sensor: $light1 lumen\n${brightness(light1)}"
             pb.setProgressWithAnimation(light1)
         }
     }
@@ -58,11 +58,11 @@ class LightSensorFragment : Fragment(), SensorEventListener {
     private fun brightness(brightness: Float): String {
 
         return when (brightness.toInt()) {
-            0 -> "Pitch black"
-            in 1..10 -> "Dark"
-            in 11..50 -> "Grey"
-            in 51..5000 -> "Normal"
-            in 5001..25000 -> "Incredibly bright"
+            0 -> "Loading..."
+            in 1..100 -> "Very Dark"
+            in 101..1000 -> "Low Bright"
+            in 1001..5000 -> "Normal"
+            in 5001..25000 -> "Incredibly Bright"
             else -> "This light will blind you"
         }
     }

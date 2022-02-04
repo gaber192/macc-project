@@ -10,7 +10,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_preferred">Preferred</string>
     <string name="menu_buddies">Buddies</string>
-    <string name="menu_utilities">Utilities</string>
+    <string name="menu_utilities">Weather</string>
     <string name="menu_info">Info</string>
     <string name="menu_light">Luminometer</string>
     <string name="menu_bar">Barometer</string>

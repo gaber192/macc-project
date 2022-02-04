@@ -25,7 +25,11 @@ class MeteoSensorFragment : Fragment(), SensorEventListener {
     private var _binding: FragmentMeteosensorBinding? = null
     private val binding get() = _binding!!
 
+    private var secondo: Sensor? = null
+
     private lateinit var text: TextView
+
+    //private lateinit var text2: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +43,7 @@ class MeteoSensorFragment : Fragment(), SensorEventListener {
         sensorManager = requireContext().getSystemService(SENSOR_SERVICE) as SensorManager
         pressure = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE)
 
+       // secondo = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
 
 
         return root
@@ -51,8 +56,9 @@ class MeteoSensorFragment : Fragment(), SensorEventListener {
 
     override fun onSensorChanged(event: SensorEvent) {
         val millibarsOfPressure = event.values[0]
-        text.text = event.values[0].toString()
+        text.text = event.values[0].toString()+" millibar"
 
+        //text2.text=event.values[1].toString()+"Celsius"
         // Do something with this sensor data.
     }
 
@@ -60,6 +66,7 @@ class MeteoSensorFragment : Fragment(), SensorEventListener {
         // Register a listener for the sensor.
         super.onResume()
         sensorManager.registerListener(this, pressure, SensorManager.SENSOR_DELAY_NORMAL)
+        //sensorManager.registerListener(this, secondo, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     override fun onPause() {
