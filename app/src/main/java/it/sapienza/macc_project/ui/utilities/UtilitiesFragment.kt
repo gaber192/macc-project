@@ -89,7 +89,8 @@ class UtilitiesFragment : Fragment()  {
     }
     private fun RunRequest()
     {
-        val codice:String="b011a7a5761de49fa493a4489d495a8d"// mail=password
+        val codice=resources.getString(R.string.owm_key)
+            //"b011a7a5761de49fa493a4489d495a8d"// mail=password
         val cityName:String = "Rome,it"
         val url: URL? = try {
             URL( "https://api.openweathermap.org/data/2.5/weather?lat="+myloc.latitude+"&lon="+myloc.longitude+"&in&units=metric&appid="+codice)
