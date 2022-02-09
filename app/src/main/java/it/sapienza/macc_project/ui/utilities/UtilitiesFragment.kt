@@ -15,11 +15,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import it.sapienza.macc_project.databinding.FragmentUtilitiesBinding
-import androidx.appcompat.app.AppCompatActivity
 
 import android.util.Log
-import androidx.core.content.ContextCompat
 import it.sapienza.macc_project.R
+import okhttp3.OkHttpClient
 
 import org.json.JSONObject
 import java.net.HttpURLConnection
@@ -39,15 +38,16 @@ class UtilitiesFragment : Fragment()  {
     var myloc : Location = Location("A")
     private lateinit var locationManager: LocationManager
     private val binding get() = _binding!!
-
+    /*private lateinit var okHttpClient : OkHttpClient
     lateinit var proxy : Proxy
-    var time = "0"
-    var value = "0"
+    var time = "1"
+    var value = "1"
     val callback =  fun (time : String, value:String){
         this.time = time
         this.value = value
+        Log.d("DATI",this.time+" "+this.value)
     }
-
+*/
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -67,15 +67,12 @@ class UtilitiesFragment : Fragment()  {
         myloc.latitude
         myloc.longitude
 
-
-
-
         val rightNow = Calendar.getInstance()
-        time = rightNow.get(Calendar.HOUR_OF_DAY).toString()+":"+rightNow.get(Calendar.MINUTE).toString()
+        //time = rightNow.get(Calendar.HOUR_OF_DAY).toString()+":"+rightNow.get(Calendar.MINUTE).toString()
 
-        val Hour: Int =rightNow.get(Calendar.HOUR_OF_DAY)+1 // return the hour in 24 hrs format (ranging from 0-23)
+        //val Hour: Int =rightNow.get(Calendar.HOUR_OF_DAY)+1 // return the hour in 24 hrs format (ranging from 0-23)
 
-        if(6<Hour && Hour<=13) {
+        /*if(6<Hour && Hour<=13) {
             view?.invalidate()
             view?.setBackgroundResource(R.drawable.sun)
         }else if (13<Hour && Hour<=20){
@@ -84,12 +81,13 @@ class UtilitiesFragment : Fragment()  {
         }else if (20<Hour || Hour<=6){
             view?.invalidate()
             view?.setBackgroundResource(R.drawable.sun)
-        }
+        }*/
 
-
+        //okHttpClient = OkHttpClient()
         RunRequest()
 
-        proxy = Proxy(1000,callback)
+        //proxy = Proxy(1000,callback)
+        //proxy.start()
 
 
         val root: View = binding.root
@@ -130,8 +128,7 @@ class UtilitiesFragment : Fragment()  {
         tempText.text = temp
         minmaxTempText.text = "min "+minmaxTemp+" max"
 
-        value=temp
-
+        //value=temp
 
     }
     override fun onDestroyView() {
@@ -141,11 +138,11 @@ class UtilitiesFragment : Fragment()  {
 
     override fun onStart() {
         super.onStart()
-        proxy.start()
+        //proxy.start()
     }
 
     override fun onPause() {
         super.onPause()
-        proxy.pause()
+        //proxy.pause()
     }
 }
