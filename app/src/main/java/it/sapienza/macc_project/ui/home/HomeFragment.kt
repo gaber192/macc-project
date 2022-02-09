@@ -116,8 +116,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
         builder.setNegativeButton("No") { dialog, which ->
             Toast.makeText(requireContext(),"No", Toast.LENGTH_SHORT).show()
-            iv.visibility=View.INVISIBLE
-            tv.text=""
+            iv.visibility=View.VISIBLE
         }
 
         locationCallback = object : LocationCallback() {

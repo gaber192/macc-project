@@ -21,10 +21,6 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import it.sapienza.macc_project.R
 
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.internals.AnkoInternals.createAnkoContext
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.uiThread
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
@@ -43,6 +39,14 @@ class UtilitiesFragment : Fragment()  {
     var myloc : Location = Location("A")
     private lateinit var locationManager: LocationManager
     private val binding get() = _binding!!
+
+    lateinit var proxy : Proxy
+    var time = "0"
+    var value = "0"
+    val callback =  fun (time : String, value:String){
+        this.time = time
+        this.value = value
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -64,9 +68,12 @@ class UtilitiesFragment : Fragment()  {
         myloc.longitude
 
 
-        val rightNow = Calendar.getInstance()
 
-        val Hour: Int =rightNow.get(Calendar.HOUR_OF_DAY) // return the hour in 24 hrs format (ranging from 0-23)
+
+        val rightNow = Calendar.getInstance()
+        time = rightNow.get(Calendar.HOUR_OF_DAY).toString()+":"+rightNow.get(Calendar.MINUTE).toString()
+
+        val Hour: Int =rightNow.get(Calendar.HOUR_OF_DAY)+1 // return the hour in 24 hrs format (ranging from 0-23)
 
         if(6<Hour && Hour<=13) {
             view?.invalidate()
@@ -80,8 +87,11 @@ class UtilitiesFragment : Fragment()  {
         }
 
 
-
         RunRequest()
+
+        proxy = Proxy(1000,callback)
+
+
         val root: View = binding.root
 
 
@@ -89,12 +99,12 @@ class UtilitiesFragment : Fragment()  {
     }
     private fun RunRequest()
     {
+
         val codice = resources.getString(R.string.owm_id)
-        val cityName:String = "Rome,it"
+        var cityName:String
+
         val url: URL? = try {
             URL( "https://api.openweathermap.org/data/2.5/weather?lat="+myloc.latitude+"&lon="+myloc.longitude+"&in&units=metric&appid="+codice)
-            //"https://api.openweathermap.org/data/2.5/weather?lat={"+myloc.latitude+"}&lon={"+myloc.longitude+"}&in&units=metric&appid="+codice
-            //"https://api.openweathermap.org/data/2.5/weather?q="+cityName+",in&units=metric&appid="+codice
         }catch (e: MalformedURLException){
             Log.d("Exception", e.toString())
             null
@@ -113,15 +123,29 @@ class UtilitiesFragment : Fragment()  {
         val jsonObj = JSONObject(data)
         val main = jsonObj.getJSONObject("main")
         val temp = main.getString("temp")+"°C"
+        cityName = jsonObj.getString("name")
         val minmaxTemp = main.getString("temp_min")+"°C/"+main.getString("temp_max")+"°C"
 
         cityNameText.text = cityName
         tempText.text = temp
         minmaxTempText.text = "min "+minmaxTemp+" max"
+
+        value=temp
+
+
     }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
+    override fun onStart() {
+        super.onStart()
+        proxy.start()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        proxy.pause()
+    }
 }

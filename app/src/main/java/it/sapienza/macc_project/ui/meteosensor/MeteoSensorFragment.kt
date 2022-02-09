@@ -7,6 +7,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,8 +44,6 @@ class MeteoSensorFragment : Fragment(), SensorEventListener {
         sensorManager = requireContext().getSystemService(SENSOR_SERVICE) as SensorManager
         pressure = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE)
 
-       // secondo = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
-
 
         return root
     }
@@ -58,7 +57,7 @@ class MeteoSensorFragment : Fragment(), SensorEventListener {
         val millibarsOfPressure = event.values[0]
         text.text = event.values[0].toString()+" millibar"
 
-        //text2.text=event.values[1].toString()+"Celsius"
+
         // Do something with this sensor data.
     }
 
@@ -66,7 +65,6 @@ class MeteoSensorFragment : Fragment(), SensorEventListener {
         // Register a listener for the sensor.
         super.onResume()
         sensorManager.registerListener(this, pressure, SensorManager.SENSOR_DELAY_NORMAL)
-        //sensorManager.registerListener(this, secondo, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     override fun onPause() {
