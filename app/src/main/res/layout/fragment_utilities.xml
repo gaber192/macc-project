@@ -10,8 +10,8 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="306dp"
-        android:layout_height="83dp"
+        android:layout_width="391dp"
+        android:layout_height="157dp"
         android:fontFamily="sans-serif-medium"
         android:text="Rome"
         android:textAlignment="center"
@@ -35,8 +35,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="303dp"
-        android:layout_height="273dp"
+        android:layout_width="386dp"
+        android:layout_height="245dp"
         android:fontFamily="sans-serif-light"
         android:text="42 C"
         android:textAlignment="center"
@@ -51,14 +51,14 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="397dp"
-        android:layout_height="47dp"
+        android:layout_width="396dp"
+        android:layout_height="80dp"
         android:fontFamily="sans-serif-light"
         android:text="22/25"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
